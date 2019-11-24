@@ -188,7 +188,7 @@ var ajaxCart = (function(module, $) {
     settings = {
       formSelector       : 'form[action^="/cart/add"]',
       cartContainer      : '#CartContainer',
-      addToCartSelector  : 'input[type="submit"]',
+      addToCartSelector  : 'button[type="submit"], input[type="submit"]',
       cartCountSelector  : null,
       cartCostSelector   : null,
       moneyFormat        : '${{amount}}',
@@ -233,10 +233,11 @@ var ajaxCart = (function(module, $) {
 
   updateCountPrice = function (cart) {
     if ($cartCountSelector) {
-      $cartCountSelector.html(cart.item_count).removeClass('hidden-count');
-
+      $cartCountSelector.html(cart.item_count);//.removeClass('hidden-count');
+      $cartCountSelector.parent('.sticky-cart').removeClass('hidden-count');
       if (cart.item_count === 0) {
-        $cartCountSelector.addClass('hidden-count');
+        //$cartCountSelector.addClass('hidden-count');
+        $cartCountSelector.parent('.sticky-cart').addClass('hidden-count');
       }
     }
     if ($cartCostSelector) {
